@@ -18,11 +18,15 @@ public class DropWeapon : MonoBehaviour
             }
             if(weapon.TryGetComponent<Axe>(out Axe axe))
             {
-                axe.gameObject.SetActive(true);
+                var _image = player.GetComponentInChildren<Canvas>();
+                var image = _image.GetComponentInChildren<Axe>();
+                image.gameObject.GetComponent<Image>().enabled = true;
             }
             if (weapon.TryGetComponent<Stick>(out Stick stick))
             {
-                stick.gameObject.SetActive(true);
+                var _image = player.GetComponentInChildren<Canvas>();
+                var image = _image.GetComponentInChildren<Stick>();
+                image.gameObject.GetComponent<Image>().enabled = true;
             }
         }
         
