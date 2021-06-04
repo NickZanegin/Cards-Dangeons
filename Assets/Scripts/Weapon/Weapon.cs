@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weapon : Card
+public class Weapon : MonoBehaviour
 {
     [HideInInspector] public float Damage;
 }

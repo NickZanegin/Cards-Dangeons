@@ -11,7 +11,6 @@ public class RayCastsCheck : MonoBehaviour
     [SerializeField] private Board _board;
     [SerializeField] private PlayerMove _move;
     [SerializeField] private PlayerAttack _attack;
-    [SerializeField] private DropWeapon _drope;
     [SerializeField] private Card[] _availableCards;
 
     private Vector3[] RaycastVector = new Vector3[] { Vector3.up, Vector3.right, Vector3.down, Vector3.left };
@@ -46,12 +45,6 @@ public class RayCastsCheck : MonoBehaviour
             if (RayCard.gameObject.GetComponent<EmptyCard>())
             {
                 _move.Move(RayCard);
-            }
-            if (RayCard.gameObject.GetComponent<Weapon>())
-            {
-                Player player = _board.GetComponentInChildren<Player>();
-                var weapon = RayCard.gameObject.GetComponent<Weapon>();
-                _drope.Drop(weapon, player);
             }
             
         }

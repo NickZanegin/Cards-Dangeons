@@ -542,7 +542,6 @@ MonoBehaviour:
   _playerWeapon: {fileID: 1091824852}
   _death: {fileID: 1091824856}
   _playerUI: {fileID: 61251306}
-  _brocken: {fileID: 1625869724}
 --- !u!114 &1091824852
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -609,7 +608,6 @@ GameObject:
   - component: {fileID: 1625869723}
   - component: {fileID: 1625869722}
   - component: {fileID: 1625869721}
-  - component: {fileID: 1625869724}
   m_Layer: 0
   m_Name: Game_Manager
   m_TagString: Untagged
@@ -647,7 +645,6 @@ MonoBehaviour:
   _board: {fileID: 487642303}
   _move: {fileID: 1091824853}
   _attack: {fileID: 1091824851}
-  _drope: {fileID: 1625869724}
   _availableCards:
   - {fileID: 0}
   - {fileID: 0}
@@ -667,15 +664,3 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1625869724
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1625869720}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 982bb5a7eea096b4a80a951d0da8d3c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
