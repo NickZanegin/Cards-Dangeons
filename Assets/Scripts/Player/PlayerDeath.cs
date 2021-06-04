@@ -7,7 +7,7 @@ public class PlayerDeath : MonoBehaviour
 {
     public void Lose()
     {
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
 }

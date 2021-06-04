@@ -9,6 +9,6 @@ public class Player : Card
 
     private void Start()
     {
-        _playerHP = 20;
+        _playerHP = 230;
     }
 }
