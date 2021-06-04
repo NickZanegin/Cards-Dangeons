@@ -9,6 +9,7 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private PlayerWeapon _playerWeapon;
     [SerializeField] private PlayerDeath _death;
     [SerializeField] private PlayerHp _playerUI;
+    [SerializeField] private DropWeapon _brocken;
 
     private Player _player;
     private Enemy _enemy;
@@ -38,6 +39,7 @@ public class PlayerAttack : MonoBehaviour
             if (component.Damage <= 0) 
             {
                 Destroy(component);
+                _brocken.BrokenWeapon(_player);
             }
         }
         else
