@@ -4,19 +4,29 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
+    [SerializeField] private RayCastsCheck _ray;
     [SerializeField] private Board _board;
-    [SerializeField] private PlayerMove _move;
     [SerializeField] private PlayerWeapon _playerWeapon;
-    [SerializeField] private PlayerDeath _death;
-    [SerializeField] private PlayerHp _playerUI;
-    [SerializeField] private DropWeapon _brocken;
 
     private Player _player;
     private Enemy _enemy;
-    
+
+    public delegate void Move(Card MoveCard);
+    public event Move playerMove;
+
+    public delegate void Lose();
+    public event Lose playerLose;
+
+    public delegate void Ui(Player player);
+    public event Ui playerUi;
+
+    public delegate void Brocken(Player player);
+    public event Brocken brock;
+
     private void Start()
     {
         _player = _board.GetComponentInChildren<Player>();
+        _ray.playerAttack += Damage;
     }
 
     public void Damage(Card Enemy)
@@ -27,19 +37,19 @@ public class PlayerAttack : MonoBehaviour
         float _enemyDamage = _enemy._enemyHP;
         _strength -= _enemy._enemyHP;
         _enemy._enemyHP -= _playerDamage;
-        
-        if(_enemy._enemyHP <= 0)
+
+        if (_enemy._enemyHP <= 0)
         {
-            _move.Move(_enemy);
+            playerMove?.Invoke(_enemy);
         }
-        
-        if(_player.gameObject.TryGetComponent<Weapon>(out Weapon component))
+
+        if (_player.gameObject.TryGetComponent<Weapon>(out Weapon component))
         {
             component.Damage = _strength;
-            if (component.Damage <= 0) 
+            if (component.Damage <= 0)
             {
                 Destroy(component);
-                _brocken.BrokenWeapon(_player);
+                brock?.Invoke(_player);
             }
         }
         else
@@ -47,9 +57,10 @@ public class PlayerAttack : MonoBehaviour
             _player.gameObject.GetComponent<Player>()._playerHP -= _enemyDamage;
             if (_player.gameObject.GetComponent<Player>()._playerHP <= 0)
             {
-                _death.Lose();
+                playerLose?.Invoke();
             }
         }
-        _playerUI.AppdatePlyerUi(_player);
+        playerUi?.Invoke(_player);
     }
 }
+

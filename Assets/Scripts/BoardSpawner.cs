@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BoardSpawner : MonoBehaviour
-{   public List<Card> _cards;
-
+{   
+    public List<Card> _cards;
+    [SerializeField] private float _playerPosition;
     [SerializeField] private float _bordSize, _padding, _enemyNumbers;
     [SerializeField] private Transform _board;
     [SerializeField] private Card _card;
@@ -52,7 +53,7 @@ public class BoardSpawner : MonoBehaviour
             }
         }
         
-        if(_cards.Count == 12)
+        if(_cards.Count == _playerPosition)
         {
             return Instantiate(_player, GetSpawnPoint(currentBulidPoint, newCard), Quaternion.identity, _board);
         }
@@ -73,7 +74,7 @@ public class BoardSpawner : MonoBehaviour
         for(int i = 0; i < _enemyNumbers; i++)
         {
             int index = Random.Range(3, 15);
-            if(index != 12)
+            if(index != _playerPosition)
             {
                 _enemyIndex.Add(index);
             }

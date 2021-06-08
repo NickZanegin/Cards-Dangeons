@@ -5,6 +5,12 @@ using UnityEngine;
 public class CardsMove : MonoBehaviour
 {
     [SerializeField] private BoardSpawner _spawn;
+    [SerializeField] private PlayerMove _move;
+
+    private void Start()
+    {
+        _move.move += Move;
+    }
 
     public void Move(Vector3 _oldPlayerPosition, Vector3 _moveDirection)
     {

@@ -6,14 +6,18 @@ public class PlayerMove : MonoBehaviour
 {
     [SerializeField] private Board _board;
     [SerializeField] private RayCastsCheck _rayCast;
-    [SerializeField] private CardsMove _cardsMove;
-    [SerializeField] private int _waitTime;
+    [SerializeField] private PlayerAttack _enemyDeath;
     
     private Player _player;
+
+    public delegate void CardsMove (Vector3 OldPlayerPosition, Vector3 Direction);
+    public event CardsMove move;
 
     private void Start()
     {
         _player = _board.GetComponentInChildren<Player>();
+        _rayCast.playerMove += Move;
+        _enemyDeath.playerMove += Move;
     }
     public void Move(Card _selectedСard)
     {
@@ -22,6 +26,6 @@ public class PlayerMove : MonoBehaviour
         _rayCast.PlayerPosition();
         Destroy(_selectedСard.gameObject); // Change this.
         Vector3 Direction = OldPlayerPosition - _selectedСard.transform.position;
-        _cardsMove.Move(OldPlayerPosition, Direction);
+        move?.Invoke(OldPlayerPosition, Direction);
     }  
 }

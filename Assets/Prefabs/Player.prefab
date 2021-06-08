@@ -527,7 +527,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ed59cb4356761b4f9e1b3d770793e33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerHP: 20
+  _playerHP: 50
   _playerDamage: 0
 --- !u!114 &-8235876191776398361
 MonoBehaviour:
@@ -697,7 +697,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 20
+  m_text: 50
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
   m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}

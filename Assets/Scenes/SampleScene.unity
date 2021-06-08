@@ -153,6 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _board: {fileID: 487642303}
+  _attack: {fileID: 1091824851}
 --- !u!4 &61251307
 Transform:
   m_ObjectHideFlags: 0
@@ -295,7 +296,8 @@ MonoBehaviour:
   _cards:
   - {fileID: 333790644456826748, guid: 07dc14412c0dcb84c8edb197dc669e80, type: 3}
   - {fileID: 7867366945827946088, guid: 07fbf7d87b150664a97c805f17457d7c, type: 3}
-  - {fileID: 2989794572313225287, guid: 26ce4830318af4e4eaf59a32be018e36, type: 3}
+  - {fileID: 6165881275258810566, guid: 26ce4830318af4e4eaf59a32be018e36, type: 3}
+  _playerPosition: 12
   _bordSize: 4
   _padding: 0.5
   _enemyNumbers: 3
@@ -537,12 +539,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8e9b822fc03f9841ba95bfa542e7ffb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _ray: {fileID: 1625869722}
   _board: {fileID: 487642303}
-  _move: {fileID: 1091824853}
   _playerWeapon: {fileID: 1091824852}
-  _death: {fileID: 1091824856}
-  _playerUI: {fileID: 61251306}
-  _brocken: {fileID: 1625869724}
 --- !u!114 &1091824852
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -570,8 +569,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _board: {fileID: 487642303}
   _rayCast: {fileID: 1625869722}
-  _cardsMove: {fileID: 1625869721}
-  _waitTime: 1
+  _enemyDeath: {fileID: 1091824851}
 --- !u!4 &1091824854
 Transform:
   m_ObjectHideFlags: 0
@@ -598,6 +596,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c6273ad2da88e94fab3e035c44ce707, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _attack: {fileID: 1091824851}
 --- !u!1 &1625869720
 GameObject:
   m_ObjectHideFlags: 0
@@ -630,6 +629,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spawn: {fileID: 487642302}
+  _move: {fileID: 1091824853}
 --- !u!114 &1625869722
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -642,11 +642,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e3b7e28607189044926df6d66c2b700, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _player: {x: 0, y: 0, z: 0}
-  _waitTime: 1
   _board: {fileID: 487642303}
-  _move: {fileID: 1091824853}
-  _attack: {fileID: 1091824851}
   _drope: {fileID: 1625869724}
   _availableCards:
   - {fileID: 0}
@@ -679,3 +675,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 982bb5a7eea096b4a80a951d0da8d3c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _ray: {fileID: 1625869722}
+  _brock: {fileID: 1091824851}
