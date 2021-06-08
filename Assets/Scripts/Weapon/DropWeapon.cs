@@ -8,6 +8,9 @@ public class DropWeapon : MonoBehaviour
     [SerializeField] private RayCastsCheck _ray;
     [SerializeField] private PlayerAttack _brock;
 
+    public delegate void Drope(Player player);
+    public event Drope drope;
+
     private void Start()
     {
         _ray.playerDrop += Drop;
@@ -39,6 +42,7 @@ public class DropWeapon : MonoBehaviour
                 player.gameObject.AddComponent<Stick>();
             }
         }
+        drope?.Invoke(player);
         
     }
     public void BrokenWeapon(Player _player)

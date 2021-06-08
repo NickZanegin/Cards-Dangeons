@@ -17,11 +17,14 @@ public class PlayerAttack : MonoBehaviour
     public delegate void Lose();
     public event Lose playerLose;
 
-    public delegate void Ui(Player player);
-    public event Ui playerUi;
+    public delegate void PlayerUi(Player player);
+    public event PlayerUi playerUi;
 
     public delegate void Brocken(Player player);
     public event Brocken brock;
+
+    public delegate void EnemyUi(Enemy enemy);
+    public event EnemyUi enemyUi;
 
     private void Start()
     {
@@ -61,6 +64,7 @@ public class PlayerAttack : MonoBehaviour
             }
         }
         playerUi?.Invoke(_player);
+        enemyUi?.Invoke(Enemy.gameObject.GetComponent<Enemy>());
     }
 }
 

@@ -3,7 +3,6 @@ using TMPro;
 
 public class PlayerHp : MonoBehaviour
 {
-    [SerializeField] private Board _board;
     [SerializeField] private PlayerAttack _attack;
 
     private TextMeshProUGUI _hp;

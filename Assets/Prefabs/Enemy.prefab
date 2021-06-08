@@ -113,6 +113,7 @@ GameObject:
   - component: {fileID: 2345000150880758006}
   - component: {fileID: 5322129013209697061}
   - component: {fileID: 3450693113917994028}
+  - component: {fileID: 3975977095396772253}
   m_Layer: 5
   m_Name: HP
   m_TagString: Untagged
@@ -167,7 +168,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 30
+  m_text: 5
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
   m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
@@ -236,6 +237,18 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &3975977095396772253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5408114794765780519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 153ff059503491444ae7460f46fa5d92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7729665814668217440
 GameObject:
   m_ObjectHideFlags: 0
@@ -345,7 +358,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b16997747bbba74ab1d6fbf897c0386, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyHP: 30
+  _enemyHP: 5
 --- !u!1 &8518040733911229661
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Enemy : Card
 {
-    public float _enemyHP;
+    [HideInInspector] public float _enemyHP;
 
     private void Start()
     {
-        _enemyHP = 30;
+        _enemyHP = 5;
     }
 }

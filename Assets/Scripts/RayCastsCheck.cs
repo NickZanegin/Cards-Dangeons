@@ -9,7 +9,7 @@ public class RayCastsCheck : MonoBehaviour
     [SerializeField] private DropWeapon _drope;
     [SerializeField] private Card[] _availableCards;
 
-    private int _waitTime;
+    [SerializeField] private int _waitTime;
     private Vector3 _player;
     private Vector3[] RaycastVector;
     private bool _attackeble = true;
