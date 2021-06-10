@@ -3,28 +3,49 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BoardSpawner : MonoBehaviour
-{   
+{
+    public float _bordSize;
     public List<Card> _cards;
-    [SerializeField] private float _playerPosition;
-    [SerializeField] private float _bordSize, _padding, _enemyNumbers;
+
+    [SerializeField] private int _playerPosition;
+    [SerializeField] private float _padding;
+    [SerializeField] private PlayerMove _move;
+    [SerializeField] private NextRoom _nextRoom;
     [SerializeField] private Transform _board;
     [SerializeField] private Card _card;
     [SerializeField] private Card _player;
-    [SerializeField] private Enemy _enemy;
+    [SerializeField] private Card _door;
+
+    [HideInInspector] public bool _havePlayer;
 
     private List<int> _enemyIndex;
-    private float Row = 0;
+    private float Row;
+
+    public delegate List<int> EnemyIndex(int _playerPosition);
+    public event EnemyIndex indexEnemy;
+
+    public delegate Card Enemys(Transform currentBulidPoint, Card newCard);
+    public event Enemys spawnEnemy;
+
+    public delegate Card Drop(Transform currentBulidPoint, Card newCard);
+    public event Drop dropSpawn;
 
     private void Awake()
     {
-        _enemyIndex = new List<int>();
-        EnemySpawnPoint();
+        _havePlayer = false;
+        _enemyIndex = indexEnemy.Invoke(_playerPosition);
         BordSpawn();
+    }
+
+    private void Start()
+    {
+        _move.move += ListCheck;
+        _nextRoom.newRoom += BordSpawn;
     }
 
     private void BordSpawn()
     {
-        
+        Row = 0;
         for (int y = 0; y < _bordSize; y++)
         {   
             Transform currentPoint = _board;
@@ -49,46 +70,32 @@ public class BoardSpawner : MonoBehaviour
         {
             if (_cards.Count == _enemyIndex[i])
             {
-                return Instantiate(_enemy, GetSpawnPoint(currentBulidPoint, newCard), Quaternion.identity, _board);
+                return spawnEnemy?.Invoke(currentBulidPoint, newCard);
             }
         }
-        
-        if(_cards.Count == _playerPosition)
+        if( _havePlayer == false && _cards.Count == _playerPosition)
         {
             return Instantiate(_player, GetSpawnPoint(currentBulidPoint, newCard), Quaternion.identity, _board);
         }
         else
         {
-            return Instantiate(_cards[Random.Range(0, 3)], GetSpawnPoint(currentBulidPoint, newCard), Quaternion.identity, _board);
-        }
-            
+            return dropSpawn.Invoke(currentBulidPoint,newCard);
+        }  
     }
 
-    private Vector3 GetSpawnPoint(Transform currentSegment, Card newCard)
+    public Vector3 GetSpawnPoint(Transform currentSegment, Card newCard)
     {
         return new Vector3(currentSegment.position.x + newCard.transform.localScale.x + _padding, newCard.transform.position.y + Row , _board.position.z);
     }
 
-    private void EnemySpawnPoint()
+    private void ListCheck(Vector3 OldPlayerPosition, Vector3 Direction)
     {
-        for(int i = 0; i < _enemyNumbers; i++)
+        for(int i = 0; i < _cards.Count; i++)
         {
-            int index = Random.Range(3, 15);
-            if(index != _playerPosition)
+            if(_cards[i] == null)
             {
-                _enemyIndex.Add(index);
+                _cards.Remove(_cards[i]);
             }
-            else
-            {
-                i--;
-            }  
         }
     }
-
-    public void AngleSpawn(Vector3 Postition)
-    {
-        Instantiate(_cards[Random.Range(0, 3)], Postition, Quaternion.identity, _board);
-    }
-
-
 }

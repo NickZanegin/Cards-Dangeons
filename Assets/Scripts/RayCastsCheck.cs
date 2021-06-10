@@ -6,13 +6,15 @@ using UnityEngine;
 public class RayCastsCheck : MonoBehaviour
 {
     [SerializeField] private Board _board;
+    [SerializeField] private EnemySpawn _enemySpawn;
     [SerializeField] private DropWeapon _drope;
     [SerializeField] private Card[] _availableCards;
 
     [SerializeField] private int _waitTime;
     private Vector3 _player;
     private Vector3[] RaycastVector;
-    private bool _attackeble = true;
+    private bool _moveble = true;
+    private bool _finishRoom = false;
 
     public delegate void Attack(Card Enemy);
     public event Attack playerAttack;
@@ -23,10 +25,23 @@ public class RayCastsCheck : MonoBehaviour
     public delegate void Drop(Weapon weapon, Player player);
     public event Drop playerDrop;
 
+    public delegate void HP(Card hp);
+    public event HP hp;
+
+    public delegate void ChestOpen(Vector3 chestPosition, Card chest);
+    public event ChestOpen chestOpen;
+
+    public delegate void NextRoom();
+    public event NextRoom roomchenge;
+
+    public delegate void HpUi(Player player);
+    public event HpUi hpUi;
+
     private void Start()
     {
         PlayerPosition();
         RaycastVector = new Vector3[] { Vector3.up, Vector3.right, Vector3.down, Vector3.left };
+        _enemySpawn.finish += PlayerWin;
     }
 
     private void Update()
@@ -43,15 +58,11 @@ public class RayCastsCheck : MonoBehaviour
     {
         if (MoveCheck(NeighboringСards(_player), RayCard) && RayCard != null)
         {
-            if (RayCard.gameObject.GetComponent<Enemy>() && _attackeble)
+            if (RayCard.gameObject.GetComponent<Enemy>() && _moveble)
             {
                 playerAttack?.Invoke(RayCard);
-                _attackeble = false;
+                _moveble = false;
                 StartCoroutine(WaitAttack());
-            }
-            if (RayCard.gameObject.GetComponent<EmptyCard>())
-            {
-                playerMove?.Invoke(RayCard);
             }
             if (RayCard.gameObject.GetComponent<Weapon>())
             {
@@ -59,7 +70,33 @@ public class RayCastsCheck : MonoBehaviour
                 var weapon = RayCard.gameObject.GetComponent<Weapon>();
                 playerDrop?.Invoke(weapon,player);
             }
-
+            if (RayCard.gameObject.GetComponent<Healing>())
+            {
+                hp?.Invoke(RayCard);
+                hpUi?.Invoke(_board.GetComponentInChildren<Player>());
+            }
+            if (RayCard.gameObject.GetComponent<Chest>())
+            {
+                Vector3 chestPoint = RayCard.transform.position;
+                chestOpen?.Invoke(chestPoint, RayCard);
+                _moveble = false;
+                StartCoroutine(WaitAttack());
+            }
+            if (RayCard.gameObject.GetComponent<EmptyCard>() && _moveble)
+            {
+                playerMove?.Invoke(RayCard);
+            }
+        }
+        if (_finishRoom && RayCard != null)
+        {
+            _moveble = false;
+            if(RayCard.gameObject.GetComponent<Door>())
+            {
+                roomchenge?.Invoke();
+                _finishRoom = false;
+                _moveble = true;
+            }
+            
         }
     }
     private bool MoveCheck(Card[] _availeble, Card RayCard)
@@ -96,9 +133,14 @@ public class RayCastsCheck : MonoBehaviour
         _player = _board.GetComponentInChildren<Player>().transform.position;
     }
 
+    private void PlayerWin()
+    {
+        _finishRoom = true;
+    }
+
     IEnumerator WaitAttack()
     {
         yield return new WaitForSeconds(_waitTime);
-        _attackeble = true;
+        _moveble = true;
     }
 }

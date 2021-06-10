@@ -12,12 +12,25 @@ public class WeaponStrength : MonoBehaviour
     {
         _attack.playerUi += AppdateStrengthUi;
         _drop.drope += AppdateStrengthUi;
+
     }
-    public void AppdateStrengthUi(Player _player)
+    private void AppdateStrengthUi(Player _player)
     {
         Strength _text = _player.GetComponentInChildren<Strength>();
         _strength = _text.gameObject.GetComponent<TextMeshProUGUI>();
-        float Uistrength = _player.gameObject.GetComponent<Weapon>().Damage;
-        _strength.text = Uistrength.ToString();
+
+        if (_player.gameObject.TryGetComponent<Weapon>(out Weapon component))
+        {
+            float Uistrength = _player.gameObject.GetComponent<Weapon>().Damage;
+            if(Uistrength >= 0)
+            {
+                _strength.text = Uistrength.ToString();
+            }
+            else
+            {
+                _strength.text = 0.ToString();
+            }
+        }
+
     }
 }

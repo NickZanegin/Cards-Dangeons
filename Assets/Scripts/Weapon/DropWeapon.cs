@@ -50,5 +50,6 @@ public class DropWeapon : MonoBehaviour
         var _image = _player.GetComponentInChildren<Canvas>();
         var image = _image.GetComponentInChildren<Weapon>();
         image.gameObject.GetComponent<Image>().enabled = false;
+
     }
 }

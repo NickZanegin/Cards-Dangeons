@@ -8,6 +8,6 @@ public class Enemy : Card
 
     private void Start()
     {
-        _enemyHP = 5;
+        _enemyHP = 35;
     }
 }

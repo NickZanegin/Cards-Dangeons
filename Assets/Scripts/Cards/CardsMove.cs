@@ -1,11 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CardsMove : MonoBehaviour
 {
     [SerializeField] private BoardSpawner _spawn;
     [SerializeField] private PlayerMove _move;
+
+    public delegate void AnglSpawn(Vector3 OldCardPosition);
+    public event AnglSpawn angle;
+
 
     private void Start()
     {
@@ -29,11 +31,11 @@ public class CardsMove : MonoBehaviour
                 hit[i].transform.position = OldCardPosition;
                 OldCardPosition = NextCardPositin;
             }
-            _spawn.AngleSpawn(OldCardPosition);
+            angle.Invoke(OldCardPosition);
         }
         else
         {
-            _spawn.AngleSpawn(_oldPlayerPosition);
+            angle.Invoke(_oldPlayerPosition);
         }
     }
 }
