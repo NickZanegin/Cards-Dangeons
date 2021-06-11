@@ -531,9 +531,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 975826550}
+  - component: {fileID: 975826551}
   - component: {fileID: 975826549}
   - component: {fileID: 975826548}
-  - component: {fileID: 975826551}
   - component: {fileID: 975826552}
   m_Layer: 0
   m_Name: Spawn Manager
@@ -554,7 +554,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b210cfd5563089742a2c526e9c339b57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyNumbers: 1
+  _enemyNumbers: 3
   _enemy: {fileID: 7450874685066412106, guid: c186807f39356d24981b96e71d016a67, type: 3}
   _attack: {fileID: 1091824851}
   _board: {fileID: 487642303}
@@ -580,7 +580,6 @@ MonoBehaviour:
   _board: {fileID: 487642304}
   _card: {fileID: 7867366945827946088, guid: 07fbf7d87b150664a97c805f17457d7c, type: 3}
   _player: {fileID: 8619986182228867809, guid: 72735f4aa845a764ba2a335f0b31834d, type: 3}
-  _door: {fileID: 5459158545167989777, guid: caeebe721122bba41a6b70d61db586d8, type: 3}
   _havePlayer: 0
 --- !u!4 &975826550
 Transform:

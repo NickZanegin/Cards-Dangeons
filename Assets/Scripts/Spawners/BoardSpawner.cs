@@ -14,7 +14,6 @@ public class BoardSpawner : MonoBehaviour
     [SerializeField] private Transform _board;
     [SerializeField] private Card _card;
     [SerializeField] private Card _player;
-    [SerializeField] private Card _door;
 
     [HideInInspector] public bool _havePlayer;
 
@@ -34,13 +33,13 @@ public class BoardSpawner : MonoBehaviour
     {
         _havePlayer = false;
         _enemyIndex = indexEnemy.Invoke(_playerPosition);
-        BordSpawn();
     }
 
     private void Start()
     {
         _move.move += ListCheck;
         _nextRoom.newRoom += BordSpawn;
+        BordSpawn();
     }
 
     private void BordSpawn()
@@ -53,10 +52,8 @@ public class BoardSpawner : MonoBehaviour
 
             for (int x = 0; x < _bordSize; x++)
             {
-                Card newCard = SpawnCard(currentPoint,_card);
+                Card newCard = SpawnCard(currentPoint, _card);
                 _cards.Add(newCard);
-
-
                 currentPoint = newCard.transform;
                 lastCard = newCard;
             }

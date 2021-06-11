@@ -23,6 +23,7 @@ public class DropSpawn : MonoBehaviour
 
     private Card Spawner(Transform currentBulidPoint, Card newCard)
     {
+        //Debug.Log("Check");
         return Spawn(_spawner.GetSpawnPoint(currentBulidPoint, newCard));
     }
 
