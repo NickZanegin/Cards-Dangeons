@@ -20,7 +20,7 @@ public class PlayerAttack : MonoBehaviour
     public delegate void PlayerUi(Player player);
     public event PlayerUi playerUi;
 
-    public delegate void Brocken(Player player);
+    public delegate void Brocken();
     public event Brocken brock;
 
     public delegate void EnemyUi(Enemy enemy);
@@ -52,7 +52,7 @@ public class PlayerAttack : MonoBehaviour
             if (component.Damage <= 0)
             {
                 Destroy(component);
-                brock?.Invoke(_player);
+                brock?.Invoke();
             }
         }
         else

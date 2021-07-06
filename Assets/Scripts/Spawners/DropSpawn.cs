@@ -29,12 +29,12 @@ public class DropSpawn : MonoBehaviour
 
     private Card Spawn(Vector3 currentBulidPoint)
     {
-        return Instantiate(_drop[Random.Range(0, 3)], currentBulidPoint, Quaternion.identity, _board.transform);
+        return Instantiate(_drop[Random.Range(0, _drop.Count)], currentBulidPoint, Quaternion.identity, _board.transform);
     }
 
     public void AngleSpawn(Vector3 Postition)
     {
-        Card NewCard = Instantiate(_drop[Random.Range(0, 3)], Postition, Quaternion.identity, _board.transform);
+        Card NewCard = Instantiate(_drop[Random.Range(0, _drop.Count)], Postition, Quaternion.identity, _board.transform);
         _spawner._cards.Add(NewCard);
     }
 }

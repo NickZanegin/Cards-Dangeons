@@ -5,9 +5,5 @@ using UnityEngine;
 public class Enemy : Card
 {
     [HideInInspector] public float _enemyHP;
-
-    private void Start()
-    {
-        _enemyHP = 35;
-    }
+    [HideInInspector] public int _coins;
 }

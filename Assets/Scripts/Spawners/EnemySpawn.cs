@@ -5,10 +5,11 @@ using UnityEngine;
 public class EnemySpawn : MonoBehaviour
 {
     [SerializeField] private float _enemyNumbers;
-    [SerializeField] private Enemy _enemy;
     [SerializeField] private PlayerAttack _attack;
     [SerializeField] private Board _board;
     [SerializeField] private BoardSpawner _boardSpawner;
+
+    [SerializeField] private List<Enemy> _enemies;
 
 
     public delegate void RoomFinish();
@@ -27,16 +28,18 @@ public class EnemySpawn : MonoBehaviour
 
     private Card SpawnEnemys( Transform currentBulidPoint, Card newCard)
     {
-        return Instantiate(_enemy, _boardSpawner.GetSpawnPoint(currentBulidPoint, newCard), Quaternion.identity, _board.transform);
+
+        return Instantiate(_enemies[Random.Range(0,1)], _boardSpawner.GetSpawnPoint(currentBulidPoint, newCard), Quaternion.identity, _board.transform);
     }
 
     private List<int> EnemySpawnPoint(int _playerPosition)
     {
         List<int> _enemyIndex = new List<int>();
+        int lastIndex = 0;
         for (int i = 0; i < _enemyNumbers; i++)
         {
-            int index = Random.Range(0, 12);
-            if (index != _playerPosition)
+            int index = Random.Range(1, 15);
+            if(index != lastIndex && index != _playerPosition)
             {
                 _enemyIndex.Add(index);
             }
@@ -44,6 +47,7 @@ public class EnemySpawn : MonoBehaviour
             {
                 i--;
             }
+            lastIndex = index;
         }
         return _enemyIndex;
 
@@ -55,6 +59,7 @@ public class EnemySpawn : MonoBehaviour
         if (_enemyNumbers == 0)
         {
             finish?.Invoke();
+            _enemyNumbers = 3;
         }
     }
 }

@@ -32,7 +32,6 @@ public class BoardSpawner : MonoBehaviour
     private void Awake()
     {
         _havePlayer = false;
-        _enemyIndex = indexEnemy.Invoke(_playerPosition);
     }
 
     private void Start()
@@ -44,6 +43,7 @@ public class BoardSpawner : MonoBehaviour
 
     private void BordSpawn()
     {
+        _enemyIndex = indexEnemy.Invoke(PlayerIndex());
         Row = 0;
         for (int y = 0; y < _bordSize; y++)
         {   
@@ -94,5 +94,19 @@ public class BoardSpawner : MonoBehaviour
                 _cards.Remove(_cards[i]);
             }
         }
+    }
+
+    private int PlayerIndex()
+    {
+        int index = 0;
+        for(int i = 0; i < _cards.Count; i++)
+        {
+            if(_cards[i] == _board.gameObject.GetComponentInChildren<Player>())
+            {
+                index = i;
+            }
+        }
+        return index;
+        
     }
 }
